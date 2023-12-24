@@ -8,6 +8,8 @@ import DriverView from "../views/DriverView.vue";
 import DrivingView from "../views/DrivingView.vue";
 import StandByView from "../views/StandByView.vue";
 import axios from "axios";
+import { isEqual } from 'fast-deep-equal';
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
