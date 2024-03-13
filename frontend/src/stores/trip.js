@@ -10,9 +10,18 @@ export const useTripStore = defineStore('trip', () => {
         lng: null
     }
 
+    const tripDefaults = {
+        distance: null,
+        duration: null,
+        price: null,
+   
+    }
+
+
     const origin = reactive({ ...locationDefaults })
     const destination = reactive({ ...locationDefaults })
     const driver_location = reactive({ ...locationDefaults })
+    const trip_info = reactive({ ...tripDefaults })
 
     const driver = reactive({
         id: null,
@@ -37,6 +46,7 @@ export const useTripStore = defineStore('trip', () => {
         Object.assign(origin, { ...locationDefaults })
         Object.assign(destination, { ...locationDefaults })
         Object.assign(driver_location, { ...locationDefaults })
+        Object.assign(trip_info, { ...tripDefaults })
 
         Object.keys(driver).forEach(key => {
             if (key !== 'user') {
@@ -50,5 +60,5 @@ export const useTripStore = defineStore('trip', () => {
         is_complete.value = false
     }
 
-    return { id, user_id, origin, destination, driver_location, driverName, is_started, is_complete, reset }
+    return { id, user_id, origin, destination, driver_location,trip_info, driverName, is_started, is_complete, reset }
 })

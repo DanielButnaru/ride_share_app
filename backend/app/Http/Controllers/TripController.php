@@ -10,6 +10,7 @@ use App\Events\TripStarted;
 use App\Models\Trip;
 use Illuminate\Http\Request;
 
+
 class TripController extends Controller
 {
     public function store(Request $request)
@@ -111,4 +112,24 @@ class TripController extends Controller
 
         return $trip;
     }
+//    afisam toate curseele unui user
+
+    public function index(Request $request)
+    {
+        $user = $request->user(); // Obținem utilizatorul autentificat
+
+        // Verificăm dacă există un utilizator autentificat
+        if ($user) {
+            $trips = Trip::where('user_id', $user->id)
+                ->orWhereHas('driver', function ($query) use ($user) {
+                    $query->where('driver_id', $user->driver->id);
+                })
+                ->get();
+
+            return $trips;
+        }
+
+        return response()->json(['message' => 'User not authenticated.'], 401);
+    }
 }
+

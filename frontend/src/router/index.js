@@ -1,12 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import LoginView from "../views/LoginView.vue";
-import LandingView from "../views/LandingView.vue";
-import LocationView from "../views/LocationView.vue";
-import MapView from "../views/MapView.vue";
-import TripView from "../views/TripView.vue";
-import DriverView from "../views/DriverView.vue";
-import DrivingView from "../views/DrivingView.vue";
-import StandByView from "../views/StandByView.vue";
 import axios from "axios";
 import { isEqual } from 'fast-deep-equal';
 
@@ -17,42 +9,47 @@ const router = createRouter({
     {
       path: "/",
       name: "login",
-      component: LoginView,
+      component:() => import("../views/LoginView.vue"),
     },
     {
       path: "/landing",
       name: "landing",
-      component: LandingView,
+      component:() => import("../views/LandingView.vue"),
     },
     {
       path: "/location",
       name: "location",
-      component: LocationView,
+      component: () => import("../views/LocationView.vue"),
     },
     {
       path: "/map",
       name: "map",
-      component: MapView,
+      component:() => import("../views/MapView.vue"),
     },
     {
       path: "/trip",
       name: "trip",
-      component: TripView,
+      component:() => import("../views/TripView.vue"),
     },
     {
       path: "/driver",
       name: "driver",
-      component: DriverView,
+      component:()=> import("../views/DriverView.vue"),
     },
     {
       path: "/standby",
       name: "standby",
-      component: StandByView,
+      component: () => import("../views/StandByView.vue"),
     },
     {
       path:"/driving",
       name:"driving",
-      component: DrivingView,
+      component:() => import("../views/DrivingView.vue"),
+    },
+    {
+      path:"/ridehistory",
+      name:"ridehistory",
+      component: () => import("../views/RideHistoryView.vue"),
     }
   ],
 });

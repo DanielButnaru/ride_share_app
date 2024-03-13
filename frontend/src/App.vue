@@ -6,7 +6,7 @@ import  Nav  from './components/Nav.vue'
 
 
 <template>
-  <div class=" absolute">
+  <div class=" absolute z-50">
     <Nav />
   </div>
 

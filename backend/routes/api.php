@@ -19,6 +19,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/trip/{trip}/start', [TripController::class, 'start']);
     Route::post('/trip/{trip}/end', [TripController::class, 'end']);
     Route::post('/trip/{trip}/location', [TripController::class, 'location']);
+    Route::get('/trip/{trip}/index', [TripController::class, 'index']);
 
     Route::get('/user', function(Request $request) {
         return $request->user();
