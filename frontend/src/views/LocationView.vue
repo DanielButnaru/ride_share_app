@@ -28,133 +28,131 @@
     </div>
 </template>
 <script setup>
-import { useLocationStore } from '@/stores/location'
-import { useRouter } from 'vue-router'
-import { onMounted, ref, nextTick } from 'vue'
-import { Loader } from '@googlemaps/js-api-loader'
+import { useLocationStore } from '@/stores/location' // Importăm magazinul de locații pentru a gestiona locațiile
+import { useRouter } from 'vue-router' // Importăm router-ul Vue pentru a gestiona navigarea
+import { onMounted, ref, nextTick } from 'vue' // Importăm funcții Vue pentru gestionarea ciclului de viață al componentei
+import { Loader } from '@googlemaps/js-api-loader' // Importăm încărcătorul pentru API-ul Google Maps
 
-
-
-const location = useLocationStore()
-const router = useRouter()
-const gMap = ref(null)
-const mapObject = ref(null)
-const selectedDestinatination = ref(null)
-const currentLocation = ref({
-    lat: 0,
-    lng: 0
+// Variabile reactive
+const location = useLocationStore() // Store-ul pentru locații
+const router = useRouter() // Router-ul Vue
+const gMap = ref(null) // Referință către obiectul Google Map
+const mapObject = ref(null) // Referință către obiectul hărții
+const selectedDestinatination = ref(null) // Locația selectată
+const currentLocation = ref({ // Locația curentă
+  lat: 0,
+  lng: 0
 })
 
+// Icone pentru marcatori
 const currentIcon = {
-    url: 'https://openmoji.org/data/color/svg/E0A9.svg',
-    scaledSize: { width: 35, height: 35 }
+  url: 'https://openmoji.org/data/color/svg/E0A9.svg', // Icon pentru locația curentă
+  scaledSize: { width: 35, height: 35 }
 }
 
 const destinationIcon = {
-    url: 'https://openmoji.org/data/color/svg/1F3C1.svg',
-    scaledSize: { width: 35, height: 35 }
+  url: 'https://openmoji.org/data/color/svg/1F3C1.svg', // Icon pentru destinație
+  scaledSize: { width: 35, height: 35 }
 }
 
-
+// Funcție pentru gestionarea schimbării locației selectate
 const handleLocationChanged = (e) => {
-    console.log('handleLocationChanged', e)
-    location.$patch({
-        destination: {
-            name: e.name,
-            address: e.formatted_address,
-            geometry: {
-                lat: e.geometry.location.lat(),
-                lng: e.geometry.location.lng()
-            }
-        }
-    })
+  console.log('handleLocationChanged', e)
+  location.$patch({
+    destination: {
+      name: e.name,
+      address: e.formatted_address,
+      geometry: {
+        lat: e.geometry.location.lat(),
+        lng: e.geometry.location.lng()
+      }
+    }
+  })
 }
 
+// Funcție pentru gestionarea selectării unei locații
 const handleSelectLocation = () => {
-    if (location.destination.name !== '') {
-        router.push({
-            name: 'map'
-        })
-    }
+  if (location.destination.name !== '') {
+    router.push({
+      name: 'map'
+    })
+  }
 }
 
+// Funcție care se activează la montarea componentei
 onMounted(() => {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-            currentLocation.value = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            }
-        }, (error) => {
-            console.error(error)
-        }, (error) => {
-            console.error(error)
-        })
-        console.error('navigator.geolocation is not supported')
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      currentLocation.value = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      }
+    }, (error) => {
 
-
-
-    }
+      console.error(error)
+    }, (error) => {
+      console.error(error)
+    })
+    console.error('navigator.geolocation is not supported')
+  }
 })
 
-
-// Functia pentrtu gestionarea click-ului pe harta
-
+// Funcție pentru gestionarea clicului pe hartă
 const handleMapClick = (e) => {
-    const lat = e.latLng.lat();
-    const lng = e.latLng.lng();
+  const lat = e.latLng.lat();
+  const lng = e.latLng.lng();
 
-    const loader = new Loader({
-        apiKey: 'AIzaSyCAqdwRPpTtDGc6lWZKlSO0EPgkAKRo-8o',
-        version: 'weekly',
-    });
+  const loader = new Loader({
+    apiKey: 'YOUR_API_KEY', // Cheia API Google Maps
+    version: 'weekly',
+  });
 
-    loader.load().then(() => {
-        const geocoder = new google.maps.Geocoder();
+  loader.load().then(() => {
+    const geocoder = new google.maps.Geocoder();
 
-        const latlng = {
-            lat: lat,
-            lng: lng,
-        };
+    const latlng = {
+      lat: lat,
+      lng: lng,
+    };
 
-        geocoder.geocode({ location: latlng }, (results, status) => {
-            if (status === 'OK') {
-                if (results[0]) {
-                    const address = results[0].formatted_address;
-                    // Actualizează locația selectată cu adresa
-                    selectedDestinatination.value = {
-                        name: address,
-                        address: address,
-                        geometry: {
-                            lat: lat,
-                            lng: lng
-                        }
-                    };
-                    location.$patch({
-                        destination: selectedDestinatination.value
-                    });
-                    const input = document.getElementById('autocomplete');
-                    input.value = address;
-                    // actualizam locatia curenta 
-                    location.destination = {
-                        name: address,
-                        address: address,
-                        geometry: {
-                            lat: lat,
-                            lng: lng
-                        }
-                    }
-                } else {
-                    console.log('Nicio adresă găsită pentru aceste coordonate.');
-                }
-            } else {
-                console.log('Geocodare nereușită din cauza:', status);
+    geocoder.geocode({ location: latlng }, (results, status) => {
+      if (status === 'OK') {
+        if (results[0]) {
+          const address = results[0].formatted_address;
+          // Actualizăm locația selectată cu adresa
+          selectedDestinatination.value = {
+            name: address,
+            address: address,
+            geometry: {
+              lat: lat,
+              lng: lng
             }
-        });
+          };
+          location.$patch({
+            destination: selectedDestinatination.value
+          });
+          const input = document.getElementById('autocomplete');
+          input.value = address;
+          // Actualizăm locația curentă
+          location.destination = {
+            name: address,
+            address: address,
+            geometry: {
+              lat: lat,
+              lng: lng
+            }
+          }
+        } else {
+          console.log('Nicio adresă găsită pentru aceste coordonate.');
+        }
+      } else {
+        console.log('Geocodare nereușită din cauza:', status);
+      }
     });
-
+  });
 };
 </script>
+
 
 <style>
 .gm-style button {

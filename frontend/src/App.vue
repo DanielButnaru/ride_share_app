@@ -11,7 +11,7 @@ import  Nav  from './components/Nav.vue'
   </div>
 
 
-  <div class="min-h-screen bg-gray-100 text-center antialiased">
+  <div class="min-h-screen bg-gray-100 text-center antialiased font-playfair">
     <RouterView />
   </div>
   
