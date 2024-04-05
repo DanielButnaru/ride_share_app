@@ -6,12 +6,10 @@ import  Nav  from './components/Nav.vue'
 
 
 <template>
-  <div class=" absolute z-50">
-    <Nav />
-  </div>
 
 
-  <div class="min-h-screen bg-gray-100 text-center antialiased font-playfair">
+
+  <div class="  relative container mx-auto h-screen text-center antialiased font-playfair">
     <RouterView />
   </div>
   

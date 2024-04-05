@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto py-16 px-10">
+  <div class="py-16 ">
     <div class="flex flex-row justify-between">
       <div>
         logo
@@ -26,7 +26,7 @@
           :class="{'slide-in': sliderActive === index && index !== 0, 'slide-out': sliderActive !== index }"
       >
         <div><img
-            class="mx-auto mb-20 h-full max-h-[800px]"
+            class="mx-auto mb-20 w-full max-w-[400px] h-[300px]  lg:h-[400px] "
             :src="slide.path"></div>
         <div>
           <h2 class="text-2xl lg:text-3xl xl:text-4xl font-bold my-4">{{ slide.title }}</h2>
@@ -39,7 +39,7 @@
         class="mt-10"
         @click="nextSlider()"
     >
-      Next
+      {{ sliderActive === 2 ? 'Get Started' : 'Next' }}
     </PrimaryButton>
 
   </div>

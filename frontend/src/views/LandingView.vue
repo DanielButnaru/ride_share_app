@@ -1,49 +1,56 @@
 <template>
-    <div class="pt-16">
-        <h1 class="text-3xl font-semibold mb-4">Andrewber</h1>
-        <div class="overflow-hidden shadow sm:rounded-md max-w-sm mx-auto text-left">
-            <div class="bg-white px-4 py-5 sm:p-6">
-                <div class="flex justify-between">
-                    <button
-                        @click="handleStartDriving"
-                        class="rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-600 focus:outline-none">
-                        Start Driving
-                    </button>
-                    <button
-                        @click="handleFindARide"
-                        class="rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-600 focus:outline-none">
-                        Find A Ride
-                    </button>
-                </div>
-            </div>
-        </div>
+
+  <Box class=" max-w-[900px]  py-14 relative top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/">
+    <h1 class="text-3xl md:text-4xl lg:text-5xl font-semibold mb-4 tracking-normal">Andrewber</h1>
+
+    <p class="text-gray-500 font-normal tracking-wide ">Choose your category!</p>
+
+    <div class=" mt-14 flex flex-col h-[140px] md:h-full justify-between md:flex-row w-1/2 mx-auto ">
+      <PrimaryButton
+          class="flex-shrink-0 overflow-hidden"
+          @click="handleStartDriving"
+      >
+        Start&nbsp;Driving
+      </PrimaryButton>
+      <PrimaryButton
+          @click="handleFindARide"
+      >
+        Find&nbsp;A&nbsp;Ride
+      </PrimaryButton>
     </div>
+
+
+  </Box>
 </template>
 <script setup>
-import { useRouter } from 'vue-router'
+import {useRouter} from 'vue-router'
 import http from '@/helpers/http'
+import Box from "../components/Box.vue";
+import PrimaryButton from "../components/PrimaryButton.vue";
 
 const router = useRouter()
 const handleStartDriving = () => {
-    http().get('/api/driver')
-        .then((response) => {
-            if (response.data.driver) {
-                router.push({
-                    name: 'standby'
-                })
-            } else {
-                router.push({
-                    name: 'driver'
-                })
-            }
-        })
-        .catch((error) => {
-            console.error(error)
-        })
+  http().get('/api/driver')
+      .then((response) => {
+        if (response.data.driver) {
+          router.push({
+            name: 'standby'
+          })
+        } else {
+          router.push({
+            name: 'driver'
+          })
+        }
+      })
+      .catch((error) => {
+        console.error(error)
+      })
 }
 const handleFindARide = () => {
-    router.push({
-        name: 'location'
-    })
+  router.push({
+    name: 'location'
+  })
 }
+
+//TODO: de remediat designul
 </script>
