@@ -51,6 +51,7 @@ import Onboarding2 from "../assets/onboarding_2.svg";
 import Onboarding3 from "../assets/onboarding_3.svg";
 import {ref} from 'vue'
 import PrimaryButton from "../components/PrimaryButton.vue";
+import router from "../router";
 
 const sliderActive = ref(0);
 const slider = ref([
@@ -76,7 +77,7 @@ function nextSlider() {
   if (sliderActive.value < slider.value.length - 1) {
     sliderActive.value++
   } else {
-    console.log("a ajuns la sfarsit")
+    router.push('/login');
   }
 }
 
