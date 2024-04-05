@@ -88,6 +88,7 @@ onMounted(() => {
         lng: position.coords.longitude
       }
     }, (error) => {
+
       console.error(error)
     }, (error) => {
       console.error(error)

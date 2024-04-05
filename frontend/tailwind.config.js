@@ -5,8 +5,20 @@ module.exports = {
   "./src/**/*.{vue,js}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors:{
+        'light-green':'#3C8F7C',
+
+      },
+      fontFamily:{
+        'playfair':['Playfair Display']
+      },
+    },
+
+
   },
-  plugins: [],
+  plugins: [
+      require("tw-elements/plugin.cjs")
+  ],
 }
 
