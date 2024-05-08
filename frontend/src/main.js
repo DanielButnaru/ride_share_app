@@ -8,6 +8,7 @@ import VueGoogleMaps from '@fawmi/vue-google-maps'
 
 
 import './assets/main.css'
+import './assets/style/style.css'
 
 const app = createApp(App)
 

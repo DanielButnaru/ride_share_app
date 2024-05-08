@@ -1,37 +1,44 @@
 <template>
-    <div class="absolute  top-10 z-40 left-1/2 -translate-x-1/2 w-3/4 bg-transparent">
-        <form action="#" @submit.prevent="">
-            <div class="flex justify-center items-center space-x-2 overflow-hidden  sm:rounded-md w-3/4 mx-auto text-left">
-                <div class="py-1 w-3/4">
-                    <div>
-                        <GMapAutocomplete placeholder="My destination" @place_changed="handleLocationChanged"
-                            ref="autocomplete" :options="{ types: ['address'] }" id="autocomplete"
-                            class="mt-1 block w-full px-3 py-3 rounded-md border border-gray-300 shadow-sm focus:border-black focus:outline-none">
-                        </GMapAutocomplete>
-                    </div>
-                </div>
-                <div class="py-1">
-                    <button @click.prevent="handleSelectLocation" type="button"
-                        class="inline justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-600 focus:outline-none">
-                        Find A Ride
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="relative w-full h-full">
-        <GMapMap :zoom="14" :center="currentLocation" ref="gMap" style="width:100%; height: 100vh;" @click="handleMapClick">
-            <GMapMarker :position="currentLocation" :icon="currentIcon" />
-            <GMapMarker v-if="selectedDestinatination" :position="selectedDestinatination.geometry"
-                :icon="destinationIcon" />
-        </GMapMap>
-    </div>
+  <div class="absolute  top-10 z-40 left-1/2 -translate-x-1/2 w-3/4 bg-transparent">
+    <form action="#" @submit.prevent="">
+      <div class="flex justify-center items-center space-x-2 overflow-hidden  sm:rounded-md w-3/4 mx-auto text-left">
+        <div class="py-1 w-3/4">
+          <div>
+            <GMapAutocomplete placeholder="My destination" @place_changed="handleLocationChanged" ref="autocomplete"
+              :options="{ types: ['address'] }" id="autocomplete"
+              class="mt-1 block w-full px-3 py-3 rounded-md border border-gray-300 shadow-sm focus:border-black focus:outline-none">
+            </GMapAutocomplete>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+  <div class=" fixed left-0 w-full h-auto ">
+    <GMapMap :zoom="14" :center="currentLocation" ref="gMap" style="width:100%; height: 100vh;" @click="handleMapClick">
+      <GMapMarker :position="currentLocation" :icon="currentIcon" />
+      <GMapMarker v-if="selectedDestinatination" :position="selectedDestinatination.geometry" :icon="destinationIcon" />
+    </GMapMap>
+  </div>
+
+
+  <div>
+    <RideCategory :destination="location.destination.name" />
+  </div>
 </template>
 <script setup>
 import { useLocationStore } from '@/stores/location' // Importăm magazinul de locații pentru a gestiona locațiile
 import { useRouter } from 'vue-router' // Importăm router-ul Vue pentru a gestiona navigarea
 import { onMounted, ref, nextTick } from 'vue' // Importăm funcții Vue pentru gestionarea ciclului de viață al componentei
 import { Loader } from '@googlemaps/js-api-loader' // Importăm încărcătorul pentru API-ul Google Maps
+import PrimaryButton from "../components/PrimaryButton.vue"
+import RideCategory from "../components/RideCategory.vue";
+
+
+
+
+
+
 
 // Variabile reactive
 const location = useLocationStore() // Store-ul pentru locații
@@ -151,15 +158,17 @@ const handleMapClick = (e) => {
     });
   });
 };
+
+
 </script>
 
 
 <style>
 .gm-style button {
-    display: none !important;
+  display: none !important;
 }
 
 .gmnoprint {
-    display: none !important;
+  display: none !important;
 }
 </style>

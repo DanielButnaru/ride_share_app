@@ -8,8 +8,7 @@ import  Nav  from './components/Nav.vue'
 <template>
 
 
-
-  <div class="  relative container mx-auto h-screen text-center antialiased font-playfair">
+  <div class="  relative container mx-auto h-screen text-center antialiased ">
     <RouterView />
   </div>
   

@@ -1,6 +1,5 @@
 <template>
-
-  <Box class=" max-w-[900px]  py-14 relative top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/">
+  <Box class=" max-w-[900px]  py-14 relative top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/3">
     <h1 class="text-3xl md:text-4xl lg:text-5xl font-semibold mb-4 tracking-normal">Andrewber</h1>
 
     <p class="text-gray-500 font-normal tracking-wide ">Choose your category!</p>

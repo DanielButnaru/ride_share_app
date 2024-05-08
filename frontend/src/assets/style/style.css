@@ -1,0 +1,8 @@
+@font-face{
+    font-family: 'main';
+    src: url('/src/assets/fonts/SF-Pro.ttf')  format('truetype');
+}
+
+body{
+    font-family:'main';
+}
