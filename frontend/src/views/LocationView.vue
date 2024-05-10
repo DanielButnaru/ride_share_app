@@ -1,18 +1,6 @@
 <template>
-  <div class="absolute  top-10 z-40 left-1/2 -translate-x-1/2 w-3/4 bg-transparent">
-    <form action="#" @submit.prevent="">
-      <div class="flex justify-center items-center space-x-2 overflow-hidden  sm:rounded-md w-3/4 mx-auto text-left">
-        <div class="py-1 w-3/4">
-          <div>
-            <GMapAutocomplete placeholder="My destination" @place_changed="handleLocationChanged" ref="autocomplete"
-              :options="{ types: ['address'] }" id="autocomplete"
-              class="mt-1 block w-full px-3 py-3 rounded-md border border-gray-300 shadow-sm focus:border-black focus:outline-none">
-            </GMapAutocomplete>
-          </div>
-        </div>
-
-      </div>
-    </form>
+  <div>
+    <Search />
   </div>
   <div class=" fixed left-0 w-full h-auto ">
     <GMapMap :zoom="14" :center="currentLocation" ref="gMap" style="width:100%; height: 100vh;" @click="handleMapClick">
@@ -20,7 +8,6 @@
       <GMapMarker v-if="selectedDestinatination" :position="selectedDestinatination.geometry" :icon="destinationIcon" />
     </GMapMap>
   </div>
-
 
   <div>
     <RideCategory :destination="location.destination.name" />
@@ -31,8 +18,8 @@ import { useLocationStore } from '@/stores/location' // Importăm magazinul de l
 import { useRouter } from 'vue-router' // Importăm router-ul Vue pentru a gestiona navigarea
 import { onMounted, ref, nextTick } from 'vue' // Importăm funcții Vue pentru gestionarea ciclului de viață al componentei
 import { Loader } from '@googlemaps/js-api-loader' // Importăm încărcătorul pentru API-ul Google Maps
-import PrimaryButton from "../components/PrimaryButton.vue"
 import RideCategory from "../components/RideCategory.vue";
+import Search from '../components/Search.vue'
 
 
 
@@ -63,19 +50,19 @@ const destinationIcon = {
 }
 
 // Funcție pentru gestionarea schimbării locației selectate
-const handleLocationChanged = (e) => {
-  console.log('handleLocationChanged', e)
-  location.$patch({
-    destination: {
-      name: e.name,
-      address: e.formatted_address,
-      geometry: {
-        lat: e.geometry.location.lat(),
-        lng: e.geometry.location.lng()
-      }
-    }
-  })
-}
+// const handleLocationChanged = (e) => {
+//   console.log('handleLocationChanged', e)
+//   location.$patch({
+//     destination: {
+//       name: e.name,
+//       address: e.formatted_address,
+//       geometry: {
+//         lat: e.geometry.location.lat(),
+//         lng: e.geometry.location.lng()
+//       }
+//     }
+//   })
+// }
 
 // Funcție pentru gestionarea selectării unei locații
 const handleSelectLocation = () => {

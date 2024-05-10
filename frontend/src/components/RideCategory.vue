@@ -2,15 +2,16 @@
   <div class="fixed left-0 w-full bottom-0 " :class="{ 'expanded bg-white': isExpanded }">
 
     <div v-if="isExpanded" class="bg-white">
-      <div class="">
-        <h3 class="flex font-bold text-2xl md:text-3xl content-start m-4 md:ml-10"> Choose a ride</h3>
-      </div>
+
+      <h3 class="flex font-bold text-2xl md:text-3xl content-start m-4 md:ml-10"> Choose a ride</h3>
+
 
       <carousel :items-to-show="1" ref="getIndex">
         <slide v-for="(ride, index) in rides" :key="index">
           <div class="flex flex-col">
             <div>
-              <img :src="ride.car_image" width="400px" height="400px" class="max-w-[250px] w-full md:max-w-[300px] lg:max-w-[350px]">
+              <img :src="ride.car_image" width="400px" height="400px"
+                class="max-w-[250px] w-full md:max-w-[300px] lg:max-w-[350px]">
             </div>
             <div class="flex flex-row justify-between">
               <span class="text-lg md:text-xl font-bold">{{ ride.car }}</span>
