@@ -24,6 +24,24 @@
                     <span>{{ location.destination.name }}</span>
                 </div>
 
+                <div class="flex flex-row justify-between mt-5 items-center">
+                    <div class="flex">
+                        <img src="/src/assets/images/driver-car/sclass.png" class="w-auto h-12">
+                        <div class="flex flex-col font-semibold text-base">
+                            Luxury Trip
+                            <p class="text-xs text-gray-500 font-normal">IS-67-BUT</p>
+
+                        </div>
+                    </div>
+                    <div class="block text-base font-semibold">
+                        $10
+                        <span class="text-xs text-gray-500 font-normal">
+                          /per hour
+                        </span>
+                    </div>
+
+                </div>
+
             </div>
 
             <div>
@@ -36,7 +54,7 @@
 
 
             <div class="overflow-hidden sm:rounded-md  mx-auto text-left">
-                <div class="bg-white px-4 py-5 sm:p-6">
+                <div class="px-4 py-5 sm:p-6">
                     <h4 class="text-xl md:text-2xl lg:text-3xl font-bold flex items-start mb-2 ">Driver Details</h4>
 
                     <div class="mt-2">
@@ -45,20 +63,20 @@
                             <img src="../assets/user.jpg" class="w-16 h-16">
                             <div>
                                 <span class=" text-base md:text-lg font-bold">Driver Name</span>
-                                <span class="flex flex-row items-center">
+                                <div class="flex flex-row items-center">
                                     <svg width="16" height="16" viewBox="0 0 14 14" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="M6.99984 10.0742L10.6048 12.25L9.64817 8.14916L12.8332 5.38999L8.639 5.03416L6.99984 1.16666L5.36067 5.03416L1.1665 5.38999L4.3515 8.14916L3.39484 12.25L6.99984 10.0742Z"
                                             fill="#FFD233" />
                                     </svg>
-                                    5.0 (342 ratings)
-                                </span>
+                                    <span class="text-gray-500 text-xs">5.0 (342 ratings)</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-50  py-3 text-right ">
+                <div class=" py-3 text-right ">
 
 
                     <button @click="handleConfirmTrip" type="button"
